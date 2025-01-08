@@ -1,7 +1,8 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
+const { default: loginAct } =  require('../tests/spec/actions/newLoginAction');
 
-test('assertion dan locator',async ({page})=> {
+/* test('assertion dan locator',async ({page})=> {
     await page.goto('https://www.saucedemo.com/');
     
     const inputUsername = page.locator('#user-name');
@@ -38,12 +39,25 @@ test('assertion dan locator',async ({page})=> {
 
     const buttonContinue = page.locator('#continue');
     await buttonContinue.click('#continue');
-    
+
     const buttonFinish = page.locator('#finish');
     await buttonFinish.click('#finish');
 
     const buttonBackToProducts = page.locator('#back-to-products');
     await buttonBackToProducts.click('#back-to-products');
 
+}); */
+
+test('cara login pakai page object models', async ({ page }) => {
+    const loginObj = new loginAct(page);
+    await loginObj.goto();
+    await loginObj.InputLogin();
+    await loginObj.AddToCart();
+    await loginObj.Cart();
+    await loginObj.Checkout();
+    await loginObj.InputInformation();
+    await loginObj.Continue();
+    await loginObj.Finish();
+    await loginObj.BackToProducts();
 });
     
